@@ -10,6 +10,12 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        """
+        Определение предустановленного порядка сортировки
+        """
+        ordering = ['-publish']
+
     def __str__(self):
         return self.title
 

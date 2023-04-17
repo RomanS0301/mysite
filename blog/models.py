@@ -19,12 +19,13 @@ class Post(models.Model):
                                on_delete=models.CASCADE,
                                related_name='blog_posts')
     body = models.TextField()
-    publish = models.DateTimeField(default=timezone.now)
-    created = models.DateTimeField(auto_now_add=True)
-    update = models.DateTimeField(auto_now=True)
+    publish = models.DateTimeField(default=timezone.now, verbose_name='Дата публикации')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата сосздания')
+    update = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
     status = models.CharField(max_length=2,
                               choices=Status.choices,
-                              default=Status.DRAFT)
+                              default=Status.DRAFT,
+                              verbose_name="Статус")
 
     class Meta:
         """

@@ -4,6 +4,15 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+class PublishedManager(models.Manager):
+    """
+    Создание конкретно-прикладного менеджера
+    """
+    def get_queryset(self):
+        return super().get_queryset()\
+            .filter(staus=Post.Status.PUBLISHED)
+
+
 class Post(models.Model):
     class Status(models.TextChoices):
         """
@@ -17,20 +26,22 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250, verbose_name='Слаг')
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
-                               related_name='blog_posts')
+                               related_name='blog_posts',
+                               verbose_name='Автор')
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now, verbose_name='Дата публикации')
-    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата сосздания')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
     status = models.CharField(max_length=2,
                               choices=Status.choices,
                               default=Status.DRAFT,
                               verbose_name="Статус")
 
+    objects = models.Manager()  # менеджер, применяемый по умолчанию
+    published = PublishedManager()  # конкретно-прикладной менеджер
+
     class Meta:
-        """
-        Определение предустановленного порядка сортировки
-        """
+        # Определение предустановленного порядка сортировки
         ordering = ['-publish']
         # Добавление индекса модели
         indexes = [
@@ -39,5 +50,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-

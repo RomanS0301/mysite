@@ -15,6 +15,10 @@ class Post(models.Model):
         Определение предустановленного порядка сортировки
         """
         ordering = ['-publish']
+        # Добавление индекса модели
+        indexes = [
+            models.Index(fields=['-publish']),
+        ]
 
     def __str__(self):
         return self.title

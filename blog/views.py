@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Post
 from django.http import Http404
 
@@ -10,14 +10,15 @@ def post_list(request):
                   {'posts': posts})
 
 
-def post_detail(request, id):
+def post_detail(request, year, month, day, post):
     """
     Представление детальной информации о посте. Указанное представление принимает аргумент id поста
     """
-    try:
-        post = Post.published.get(id=id)
-    except Post.DoesNotExist:
-        raise Http404("No Post found")
+    post = get_object_or_404(Post.Status.PUBLISHED,
+                             slug=post,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
 
     return render(request,
                   'blog/post/detail.html',

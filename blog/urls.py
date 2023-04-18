@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.post_list, name='post_list'),
     # Конвертер пути
     # https://docs.djangoproject.com/en/4.1/topics/http/urls/#registering-custom-path-converters
-    path('<int:year>/<int:month>/<int:day>/<slug:posr>/',
+    path('<int:year>/<int:month>/<int:day>/<slug:post>/',
          views.post_detail,
          name='post_detail'),
 ]

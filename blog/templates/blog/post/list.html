@@ -13,6 +13,8 @@
         <p class="date">
         Опубликовал {{ post.publish }} {{ post.author }}
         </p>
+        {# В теле поста применяются два шаблонных фильтра: truncatewords - усекает значение до указаного количества слов #}
+        {#  linebreaks - конвертирует результат в разрывы строк в формате HTML#}
         {{ post.body|truncatewords:30|linebreaks }}
     {% endfor %}
 {% endblock %}

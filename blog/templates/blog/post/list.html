@@ -13,5 +13,6 @@
         <p class="date">
         Опубликовал {{ post.publish }} {{ post.author }}
         </p>
+        {{ post.body|truncatewords:30|linebreaks }}
     {% endfor %}
 {% endblock %}

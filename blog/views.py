@@ -14,7 +14,8 @@ def post_detail(request, year, month, day, post):
     """
     Представление детальной информации о посте. Указанное представление принимает аргумент id поста
     """
-    post = get_object_or_404(Post.Status.PUBLISHED,
+    post = get_object_or_404(Post,
+                             status=Post.Status.PUBLISHED,
                              slug=post,
                              publish__year=year,
                              publish__month=month,

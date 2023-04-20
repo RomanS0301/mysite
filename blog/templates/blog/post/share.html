@@ -8,11 +8,11 @@
       "{{ post.title }}"был успешно отправлен {{ form.cleaned_data.to }}.
     </p>
   {% else %}
-    <h1>Делиться "{{ post.title }}" по e-mail</h1>
+    <h1>Поделиться "{{ post.title }}" по e-mail</h1>
     <form method="post" novalidate>
       {{ form.as_p }}
       {% csrf_token %}
-      <input type="submit" value="Send e-mail">
+      <input type="submit" value="Отправить">
     </form>
   {% endif %}
 {% endblock %}

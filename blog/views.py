@@ -36,10 +36,15 @@ def post_detail(request, year, month, day, post):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
-
+    #  список активных комментариев к этому посту
+    comments = post.comments.filter(active=True)
+    #  Форма для комментирования пользователями
+    form = CommentForm()
     return render(request,
                   'blog/post/detail.html',
-                  {'post': post})
+                  {'post': post,
+                   'comments': comments,
+                   'form': form})
 
 
 # https://docs.djangoproject.com/en/4.1/ref/class-based-views/generic-display/#listview

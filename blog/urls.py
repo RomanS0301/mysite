@@ -5,9 +5,10 @@ app_name = 'blog'
 
 urlpatterns = [
     # Представление поста
-    # path('', views.post_list, name='post_list'),
-
-    path('', views.PostListView.as_view(), name='post_list'),
+    path('', views.post_list, name='post_list'),
+    path('tag/<slug:tag_slug>/',
+         views.post_list, name='post_list_by_tag'),
+    # path('', views.PostListView.as_view(), name='post_list'),
     # Конвертер пути
     # https://docs.djangoproject.com/en/4.1/topics/http/urls/#registering-custom-path-converters
     path('<int:year>/<int:month>/<int:day>/<slug:post>/',

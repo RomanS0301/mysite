@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 
 {% block title %}Мой Блог{% endblock %}
 
@@ -27,7 +28,7 @@
         </p>
         {# В теле поста применяются два шаблонных фильтра: truncatewords - усекает значение до указаного количества слов #}
         {#  linebreaks - конвертирует результат в разрывы строк в формате HTML#}
-        {{ post.body|truncatewords:30|linebreaks }}
+        {{ post.body|truncatewords_html:30}}
     {% endfor %}
     {% include 'paginator.html' with page=posts %}
 {% endblock %}
